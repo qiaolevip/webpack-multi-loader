@@ -1,0 +1,47 @@
+{
+  "name": "webpack-multi-loader",
+  "version": "1.0.0",
+  "description": "This webpack project teach you how to use webpack loader in Webpack.",
+  "keywords": [
+    "react",
+    "multi",
+    "loader",
+    "webpack"
+  ],
+  "main": "app/index.html",
+  "scripts": {
+    "start": "webpack-dev-server --history-api-fallback --no-info --open",
+    "build": "gulp build --type production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiaolevip/webpack-multi-loader.git"
+  },
+  "author": "@HappyJoe <qiaole@vip.qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qiaolevip/webpack-multi-loader/issues"
+  },
+  "homepage": "https://github.com/qiaolevip/webpack-multi-loader#readme",
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
+    "redux-slider-monitor": "^1.0.6",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.1",
+    "redux": "^3.5.2",
+    "react-router-redux": "^4.0.5"
+  }
+}
