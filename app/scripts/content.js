@@ -1,0 +1,1 @@
+module.exports = 'It works from content.js.我的世界MT 挂了';
