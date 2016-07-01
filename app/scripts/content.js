@@ -1,1 +1,0 @@
-export default 'It works from content.js.我的世界MT 挂了，<p>我在这里</p>';

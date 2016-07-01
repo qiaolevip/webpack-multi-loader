@@ -6,7 +6,7 @@ var compiler = webpack(config);
 var server = new WebpackDevServer(compiler, {
   contentBase: './app',
   hot: true,
-  historyApiFallback: false,
+  historyApiFallback: true,
   compress: true,
   quiet: false,
   noInfo: true,
