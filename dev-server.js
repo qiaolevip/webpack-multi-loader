@@ -4,7 +4,7 @@ var config = require('./webpack.config.js');
 
 var compiler = webpack(config);
 var server = new WebpackDevServer(compiler, {
-  contentBase: './app',
+  contentBase: './public',
   hot: true,
   historyApiFallback: true,
   compress: true,

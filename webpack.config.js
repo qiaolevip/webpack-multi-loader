@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
 
   entry: './app/scripts/main.js',
   output: {
@@ -23,18 +24,35 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css?modules!postcss'
+      },
+      {
+        test: /\.s[ac]ss$/,
+        loaders: ['style', 'css', 'sass?sourceMap', 'postcss']
+      },
+      {
+        test: /\.styl$/,
+        loaders: ['style', 'css', 'stylus?sourceMap', 'postcss']
       }
     ]
   },
-  plugins: [
-    /*new webpack.optimize.UglifyJsPlugin({
-     compress: {
-     warnings: false
-     },
-     output: {
-     comments: false
-     }
-     })*/
-  ]
+  postcss: [autoprefixer],
+  /*plugins: [
+    new webpack.BannerPlugin("Copyright qiaole@vip.qq.com@Joe."),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      }
+    })
+  ],*/
+
+  /*devServer: {
+    contentBase: "./public",
+    colors: true,
+    historyApiFallback: true,
+    inline: true
+  }*/
 };
