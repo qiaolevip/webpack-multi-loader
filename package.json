@@ -10,10 +10,10 @@
   ],
   "main": "app/index.html",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --no-info --history-api-fallback --inline --port 1377 --content-base ./public",
+    "start": "webpack-dev-server --progress --colors --no-info --hot --history-api-fallback --inline --port 1377 --content-base ./public",
     "webpack": "webpack --progress --colors --watch",
     "webpack-dev": "webpack-dev-server --progress --colors --no-info --history-api-fallback --open --inline --port 1377",
-    "build": "gulp build --type production"
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "babel-preset-react": "^6.11.0",
     "babel-preset-stage-1": "^6.5.0",
     "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",

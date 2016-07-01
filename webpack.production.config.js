@@ -1,15 +1,13 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
-
   entry: './app/scripts/main.js',
   output: {
     path: __dirname + '/dist',
-    publicPath: '/dist',
-    filename: 'main.bundle.js'
+    filename: '[name]-[hash].js'
   },
   module: {
     loaders: [
@@ -24,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules!postcss'
+        loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')
       },
       {
         test: /\.s[ac]ss$/,
@@ -39,28 +37,11 @@ module.exports = {
   postcss: [autoprefixer],
   plugins: [
     new webpack.BannerPlugin('Copyright qiaole@vip.qq.com@Joe.'),
-
     new HtmlWebpackPlugin({
       template: __dirname + '/app/index.tmpl.html'
     }),
-
-    new webpack.HotModuleReplacementPlugin(),
-
-    /*new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      }
-    })*/
-  ],
-
-  /*devServer: {
-    contentBase: './public',
-    colors: true,
-    historyApiFallback: true,
-    inline: true,
-    hot: true
-  }*/
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+    new ExtractTextPlugin('[name]-[hash].css')
+  ]
 };
