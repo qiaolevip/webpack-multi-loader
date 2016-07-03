@@ -18,7 +18,7 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel'
       },
@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loaders: ['style', 'css', 'stylus?sourceMap', 'postcss']
+        loaders: ['style', 'css', 'stylus?sourceMap']
       }
     ]
   },
