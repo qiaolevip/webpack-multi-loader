@@ -1,3 +1,6 @@
-import countReducers from './countReducers'
+import count from './countReducers'
 
-export default countReducers
+export {
+  count
+};
+//export default countReducers;

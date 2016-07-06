@@ -1,9 +1,8 @@
-import App from './App'
-import Home from './Home'
+import App2 from './App'
+import Home2 from './Home'
 import Foo from './Foo'
 import Bar from './Bar'
 
-export default App
-export default Home
-export default Foo
-export default Bar
+export {
+  App2, Home2, Foo, Bar
+};

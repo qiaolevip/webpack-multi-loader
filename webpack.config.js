@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'source-map',
 
-  entry: './app/scripts/main.js',
+  entry: __dirname + '/app/scripts/main.js',
   output: {
     path: __dirname + '/dist',
     publicPath: '/dist',
@@ -44,6 +44,7 @@ module.exports = {
       template: __dirname + '/app/index.tmpl.html'
     }),
 
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
 
     /*new webpack.optimize.UglifyJsPlugin({
