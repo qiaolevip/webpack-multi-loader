@@ -23,8 +23,8 @@ const store = createStore(
   combineReducers({
     ...reducers,
     routing: routerReducer
-  })
-  //DevTools.instrument()
+  }),
+  DevTools.instrument()
 );
 
 const rootElem = document.getElementById('app');

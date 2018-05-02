@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timer</title>
+</head>
+<body>
+  <timer data-date="2016-07-07 11:02:20"></timer>
+  <timer data-date="2016-07-07 15:00:30"></timer>
+  <timer data-date="2016-07-08 15:00:30"></timer>
+  <timer data-date="2016-08-07 15:00:30"></timer>
+  <timer data-date="2016-07-07 01:00:30"></timer>
+
+
+  <script>
+    function downTime(date) {
+      var arr = date.split(/[- :]/);
+      date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+      var t = date.getTime() - Date.now();
+      if (t > 0) {
+        var seconds = Math.floor( (t/1000) % 60 );
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        var hours = Math.floor( (t/(1000*60*60)) % 24 );
+        var days = Math.floor( t/(1000*60*60*24) );
+
+        return (days > 0 ? days + '天' : '') + hours + '时' + minutes + '分' + seconds + '秒';
+      } else {
+        return '';
+      }
+    }
+    function setDownTime(dom, date) {
+      var countdownTimer = null;
+      var timer = downTime(date);
+      if (timer) {
+        countdownTimer = setInterval(function() {
+          dom.innerText = downTime(date);
+        }, 1000);
+      } else {
+        clearInterval(countdownTimer);
+      }
+    }
+    function init() {
+      var timerDoms = document.getElementsByTagName('timer'), timerLen = timerDoms.length;
+      for (var i = 0; i < timerLen; i++) {
+        var timerDom = timerDoms[i];
+        var date = timerDom.dataset.date;
+        if (date) setDownTime(timerDom, date);
+      }
+    }
+    init();
+  </script>
+</body>
+</html>

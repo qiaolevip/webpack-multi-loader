@@ -1,15 +1,15 @@
-import { INCREASE, DECREASE } from '../util/constants'
+import { INCREASE, DECREASE } from '../util/constants';
 
-export function increase(n) {
+export const increase = (n) => {
   return {
     type: INCREASE,
     amount: n
   }
-}
+};
 
-export function decrease(n) {
+export const decrease = (n) => {
   return {
     type: DECREASE,
     amount: n
   }
-}
+};

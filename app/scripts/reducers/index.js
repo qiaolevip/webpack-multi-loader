@@ -1,6 +1,8 @@
-import count from './countReducers'
+import count from './countReducers';
+import foo from './fooReducers';
 
 export {
-  count
+  count,
+  foo
 };
 //export default countReducers;
