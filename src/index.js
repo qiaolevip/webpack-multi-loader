@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { observer } from 'mobx-react';
+import { observable, computed, action } from 'mobx';
 
 import './style/common.styl';
 import './style/index.styl';
@@ -10,11 +12,9 @@ import './style/index.styl';
 const text = 'Webpack entry of Index Page!';
 const app = document.getElementById('app');
 
+@observer
 class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
+  @observable date = new Date();
 
   componentDidMount() {
     this.timerID = setInterval(
@@ -23,55 +23,50 @@ class Clock extends React.Component {
     );
   }
 
+  @action tick() {
+    this.date = new Date();
+  }
+
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
 
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
   render() {
     return (
-      <div>{this.state.date.toLocaleTimeString()}</div>
+      <div>{this.date.toLocaleTimeString()}</div>
     );
   }
 }
 
+let tasks = localStorage.getItem('tasks');
+@observer
 class Task extends React.Component {
+  @observable curTask = '';
+  @observable tasks = tasks ? JSON.parse(tasks) : [];
+
   constructor(props) {
     super(props);
-    let tasks = localStorage.getItem('tasks');
-    tasks = tasks ? JSON.parse(tasks) : [];
-    this.state = {
-      curTask: '',
-      tasks
-    };
 
     this.handleChange = this.handleChange.bind(this);
     this.addTask = this.addTask.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({curTask: event.target.value});
+  handleChange(e) {
+    this.curTask = e.target.value;
   }
 
   addTask() {
-    let { curTask, tasks } = this.state;
+    let { curTask, tasks } = this;
     if (curTask) {
       tasks = [...tasks, curTask];
       localStorage.setItem('tasks', JSON.stringify(tasks));
-      this.setState(prevState => ({
-        tasks,
-        curTask: ''
-      }));
+      this.curTask = '';
+      this.tasks = tasks;
     }
   }
 
   render() {
-    const { curTask, tasks } = this.state;
+    const { curTask, tasks } = this;
     return (
       <div>
         <h2>我的任务</h2>
