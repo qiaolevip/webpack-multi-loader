@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({size: 5});
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const CompressionPlugin = require('compression-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
@@ -70,12 +72,12 @@ if (isProd) {
       }
     }),
     /*new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
-    }),*/
+     asset: '[path].gz[query]',
+     algorithm: 'gzip',
+     test: /\.js$|\.css$|\.html$/,
+     threshold: 10240,
+     minRatio: 0.8
+     }),*/
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.AggressiveSplittingPlugin(),
@@ -107,41 +109,29 @@ module.exports = {
     symlinks: false
   },
   /*optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          priority: 10
-        }
-      }
-    }
-  },*/
+   splitChunks: {
+   cacheGroups: {
+   vendor: {
+   test: /node_modules/,
+   chunks: 'initial',
+   name: 'vendor',
+   priority: 10
+   }
+   }
+   }
+   },*/
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        use: 'babel-loader',
+        use: 'happypack/loader?id=js',
         include: srcPath,
         exclude: /node_modules/
       },
       {
         test: /\.styl$/,
         use: ExtractTextPlugin.extract({
-          use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: isProd,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          }, 'stylus-loader'],
+          use: 'happypack/loader?id=styles',
           publicPath: '../'
         })
       },
@@ -169,6 +159,28 @@ module.exports = {
     new webpack.BannerPlugin('Copyright qiaole@vip.qq.com@Joe.'),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new HappyPack({
+      id: 'js',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader']
+    }),
+    new HappyPack({
+      id: 'styles',
+      threadPool: happyThreadPool,
+      loaders: [{
+        loader: 'css-loader',
+        options: {
+          minimize: isProd,
+          sourceMap: true
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true
+        }
+      }, 'stylus-loader']
+    }),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('./dist/library/manifest.json')
@@ -194,8 +206,8 @@ module.exports = {
       'X-Powered-By': '@Joe <qiaole@vip.qq.com>'
     },
     before(app){
-      app.get('/api/get', function(req, res) {
-        res.json({ custom: 'response' });
+      app.get('/api/get', function (req, res) {
+        res.json({custom: 'response'});
       });
     }
   }

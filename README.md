@@ -18,6 +18,25 @@ Install all dependencies.
 $ npm install
 ```
 
+Install Mobx
+
+```
+$ npm i -S mobx mobx-react babel-plugin-transform-decorators-legacy
+```
+
+# .babelrc
+```json
+{
+  "presets": [
+    "react",
+    "es2015",
+    "stage-1"
+  ],
+  // or "presets": ["env", "react", "stage-0"]
+  "plugins": ["transform-decorators-legacy"]
+}
+```
+
 
 ## Development
 
@@ -26,10 +45,18 @@ You can define a port with `$ gulp --port 1377`.
 
 ```
 $ npm start
+```
 
 ## Build
 
 Builds a minified version of the application in the dist folder.
 
 ```
-$ gulp build --type production
+$ npm run build
+```
+
+### Build Performance
+https://webpack.js.org/guides/build-performance/
+
+### DllPlugin
+https://doc.webpack-china.org/plugins/dll-plugin/
