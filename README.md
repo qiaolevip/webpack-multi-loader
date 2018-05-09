@@ -45,10 +45,18 @@ You can define a port with `$ gulp --port 1377`.
 
 ```
 $ npm start
+```
 
 ## Build
 
 Builds a minified version of the application in the dist folder.
 
 ```
-$ gulp build --type production
+$ npm run build
+```
+
+### Build Performance
+https://webpack.js.org/guides/build-performance/
+
+### DllPlugin
+https://doc.webpack-china.org/plugins/dll-plugin/

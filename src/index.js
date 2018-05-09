@@ -4,10 +4,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { observer } from 'mobx-react';
-import { observable, computed, action } from 'mobx';
+import { observable, action } from 'mobx';
 
-import './style/common.styl';
-import './style/index.styl';
+import './style/common';
+import './style/index';
 
 const text = 'Webpack entry of Index Page!';
 const app = document.getElementById('app');
@@ -46,16 +46,13 @@ class Task extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.addTask = this.addTask.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.curTask = e.target.value;
   }
 
-  addTask() {
+  addTask = () => {
     let { curTask, tasks } = this;
     if (curTask) {
       tasks = [...tasks, curTask];
@@ -99,7 +96,7 @@ const listItem = [
 const App = () => {
   return (
     <div>
-      <Welcome name="Joe" />
+      <Welcome name="Happy" />
       <b>Congratulations</b>
       <ul>
         {
@@ -110,6 +107,7 @@ const App = () => {
       </ul>
       <p>{text}</p>
       <Task/>
+      {/*<img src={require('images/bg-index.jpeg')} alt=""/>*/}
     </div>
   );
 };

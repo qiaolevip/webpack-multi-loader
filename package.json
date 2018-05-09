@@ -10,11 +10,12 @@
   ],
   "main": "app/index.html",
   "scripts": {
+    "prestart": "webpack --config ./webpack.dll.config.js",
     "start": "webpack-dev-server",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config ./webpack.happypack.config.js",
     "multi": "webpack --config ./webpack.multi.config.js",
     "mini": "webpack --config ./webpack.minicss.config.js",
-    "build": "NODE_ENV=production webpack"
+    "build": "npm run prestart && NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "glob": "^7.1.2",
+    "happypack": "^5.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "postcss-loader": "^2.1.4",
@@ -53,6 +55,7 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
     "webpack": "^4.6.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.1.2",
     "webpack-dashboard": "^1.1.1",
     "webpack-dev-server": "^3.1.3"
