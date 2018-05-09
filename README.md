@@ -1,8 +1,8 @@
-# dianrong-store-front
+# webpack-multi-loader
 
 This webpack project teach you how to use webpack loader in Webpack.
 
-####[Demo]()
+####[Demo](https://qiaolevip.github.io/webpack-multi-loader/docs/)
 
 ## Get the kit
 
@@ -41,7 +41,6 @@ $ npm i -S mobx mobx-react babel-plugin-transform-decorators-legacy
 ## Development
 
 Builds the application and starts a webserver with livereload. By default the webserver starts at port 1337.
-You can define a port with `$ gulp --port 1377`.
 
 ```
 $ npm start
